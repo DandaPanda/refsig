@@ -1,4 +1,4 @@
-refsig 1.0.0
+refsig 1.0.3
 ---------------------
 
 -> This package works as tool for identifying the referential signal 
