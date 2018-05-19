@@ -1,12 +1,8 @@
 refsig 1.0.0
 ---------------------
 
--> This package works as tool for identifying the referential signal 
-   from a set of unipolar iEEG data.
--> Package contains 3 methods for obtaining the reference, but second
-   method works the best and should be used in practice (see the syntax below).
-   Methods 1 works really slow and the results are not satisfying. Method Avg is
-   the basic algorithm.
+-> This package works as tool for identifying the referential signal from a set of unipolar iEEG data.
+-> Package contains 3 methods for obtaining the reference, but second method works the best and should be used in practice (see the syntax below). Methods 1 works really slow and the results are not satisfying. Method Avg is the basic algorithm.
 
 For import, use:
 >>>from refsig import ref
