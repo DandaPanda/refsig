@@ -13,6 +13,7 @@ setup(name='refsig',
       version='1.0.0',
       description='Package for obtaining the referential signal from a set of iEEG data',
       author='DandaPanda',
+      author_email='daniel-uher@hotmail.com',
       packages=['refsig'],
       keywords='reference iEEG EEG referential signal ICA',
       zip_safe=False)
