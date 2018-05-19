@@ -2,15 +2,19 @@
 """
 Created on Wed Sep 13 10:39:53 2017
 
-@author: Daniel Uher
+@author: DandaPanda
 
 Setup file for refsig package
 """
 
 from setuptools import setup
 
+def readme():
+    with open('README.rst') as f:
+        return f.read()
+
 setup(name='refsig',
-      version='1.0.0',
+      version='1.0.3',
       description='Package for obtaining the referential signal from a set of iEEG data',
       author='DandaPanda',
       author_email='daniel-uher@hotmail.com',
