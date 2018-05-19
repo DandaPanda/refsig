@@ -17,8 +17,8 @@ def avg(unipol):
     
     """ creates average reference signal from a particular set of data
     
-    unipol(  rows,columns  )      set of unipolar data obtained from iEEG
-          (channels,samples)
+    unipol(  channels,samples  )      set of unipolar data obtained from iEEG
+          
     """
     
     avg = np.zeros(unipol.shape[1])
@@ -29,20 +29,20 @@ def avg(unipol):
     return avg
 
 
-def m1(unipol, N_iterations = 20):
+def m1(unipol, N_iterations = 20, p = 0.25):
     
     """ creates the reference signal of an iEEG set of data
     using a comparative method based on correlation of independent components
     
-    x = ref.m1(unipol, N_iterations = 20)
+    x = ref.m1(unipol, N_iterations = 20, p = 0.25)
     
-    unipol(  rows,columns  )      set (matrix) of unipolar data obtained from iEEG
-         "(channels,samples)"
+    unipol(  channels,samples  )      set (matrix) of unipolar data obtained from iEEG
+         
           
     returns referential signal ref1...linear vector (the 1 indicates that method I was used)
     and a coefficient of accuracy R, which shows how accurate the calculated reference is
 
-        if R is smaller than 0.25 (R<0.25) then the calculated reference is fairly accurate 
+        if R (minimal correlation coefficient) is smaller than p (R<p), then the calculated reference is fairly accurate 
         and can be used in further equations
     """
     
@@ -115,19 +115,24 @@ def m1(unipol, N_iterations = 20):
     ref1 = Refs[np.argmin(Rs)]
     R = min(Rs)   
     
+    if R < p:
+        print('The method has found a good estimation of the referential signal with the minimal correlation coefficient',R,'being smaller than the given condition p =',p)
+    else:
+        print('Unfortunately the method could not meet the condition of p =',p,'and has reconstructed the referential signal with the minimal correlation coefficient being',R)
+    
     #check if the phase is fine, if not -> turn it upside down    
     C = np.corrcoef(ref1,avg)
     if C[1,0] < 0:
         ref1 = ref1*(-1)
         C = np.corrcoef(ref1,avg)
     
-    return ref1, R, C, Q, Rs, Ri, S_uni, S_bi              
+    return ref1             
 
     
 def m2(unipol):
         
     """ creates the reference signal of an iEEG set of data
-    using method II described in a scientific paper published at ieee.com
+    using method II described in http://doi.org/10.1109/TBME.2007.892929
     The difference from method I is that this method is solely based on
     calculating the reference instead of locating it as it was in method I
     
@@ -185,9 +190,11 @@ def m2(unipol):
       
     #check if the phase is fine, if not -> turn it upside down
     
+    print('The method has succesfully reconstructed the referential signal')
+    
     C = np.corrcoef(ref2,avg)
     if C[1,0] < 0:
         ref2 = ref2*(-1)
         C = np.corrcoef(ref2,avg)
     
-    return ref2, C, S_bi    
+    return ref2    
