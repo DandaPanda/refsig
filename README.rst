@@ -7,16 +7,13 @@ Package contains 3 methods for obtaining the reference, but second method works 
 
 
 For import, use:
+**-> from refsig import ref**
 
--> from refsig import ref
+Each method is initialized by: <br />
 
-Each method is initialized by:
-
--> ref.m1(unipol)
-
--> ref.m2(unipol) <--this one should be used!
-
--> ref.avg(unipol)
+**-> ref.m1(unipol**, N_iterations = 20, p = 0.25**)** <br />
+**-> ref.m2(unipol)** <--this one should be used! <br />
+**-> ref.avg(unipol)** <br />
 
 	where unipol is a m*k set of iEEG data, where m is the number of channels
 	and k is the number of samples. 
